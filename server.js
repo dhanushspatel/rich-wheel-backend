@@ -27,7 +27,7 @@ function writeUsers(users) {
 // === Routes ===
 
 // Signup
-app.post("/api/signup", (req, res) => {
+app.post("https://rich-wheel-backend.onrender.com", (req, res) => {
   const { email, password } = req.body;
   const users = readUsers();
 
@@ -42,7 +42,7 @@ app.post("/api/signup", (req, res) => {
 });
 
 // Login
-app.post("/api/login", (req, res) => {
+app.post("https://rich-wheel-backend.onrender.com", (req, res) => {
   const { email, password } = req.body;
   const users = readUsers();
 
@@ -55,7 +55,7 @@ app.post("/api/login", (req, res) => {
 });
 
 // Get balance
-app.get("/api/balance/:email", (req, res) => {
+app.get("https://rich-wheel-backend.onrender.com", (req, res) => {
   const users = readUsers();
   const user = users.find((u) => u.email === req.params.email);
 
@@ -65,7 +65,7 @@ app.get("/api/balance/:email", (req, res) => {
 });
 
 // Admin: Update balance
-app.post("/api/update-balance", (req, res) => {
+app.post("https://rich-wheel-backend.onrender.com", (req, res) => {
   const { email, amount, adminEmail } = req.body;
 
   const users = readUsers();
@@ -83,7 +83,7 @@ app.post("/api/update-balance", (req, res) => {
 });
 
 // Admin: Get all users
-app.get("/api/users", (req, res) => {
+app.get("https://rich-wheel-backend.onrender.com", (req, res) => {
   const users = readUsers();
   res.json(users);
 });
