@@ -1,0 +1,14 @@
+[
+    {
+      "email": "admin@richwheel.com",
+      "password": "$2a$10$ykKobKjv9Vz0zKkzER8t8eVW7s4oUeUNZ4D.0VoJPOaf3jHf7n4nq",
+      "balance": 99999,
+      "isAdmin": true
+    },
+    {
+      "email": "user1@example.com",
+      "password": "$2a$10$MphsE7JY8x1b.f1VZTUzYem3RAxAV1Zxnzbgp7/JSwx9XZtdDOmYq",
+      "balance": 2000
+    }
+  ]
+  
