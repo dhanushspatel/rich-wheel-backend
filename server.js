@@ -11,9 +11,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "../public")));
 
-// === Helpers ===
 const USERS_FILE = path.join(__dirname, "users.json");
 
+// Helper functions
 function readUsers() {
   if (!fs.existsSync(USERS_FILE)) return [];
   const data = fs.readFileSync(USERS_FILE);
@@ -27,7 +27,7 @@ function writeUsers(users) {
 // === Routes ===
 
 // Signup
-app.post("https://rich-wheel-backend.onrender.com", (req, res) => {
+app.post("/signup", (req, res) => {
   const { email, password } = req.body;
   const users = readUsers();
 
@@ -42,7 +42,7 @@ app.post("https://rich-wheel-backend.onrender.com", (req, res) => {
 });
 
 // Login
-app.post("https://rich-wheel-backend.onrender.com", (req, res) => {
+app.post("/login", (req, res) => {
   const { email, password } = req.body;
   const users = readUsers();
 
@@ -55,9 +55,10 @@ app.post("https://rich-wheel-backend.onrender.com", (req, res) => {
 });
 
 // Get balance
-app.get("https://rich-wheel-backend.onrender.com", (req, res) => {
+app.get("/balance/:email", (req, res) => {
+  const { email } = req.params;
   const users = readUsers();
-  const user = users.find((u) => u.email === req.params.email);
+  const user = users.find((u) => u.email === email);
 
   if (!user) return res.json({ success: false, message: "User not found" });
 
@@ -65,7 +66,7 @@ app.get("https://rich-wheel-backend.onrender.com", (req, res) => {
 });
 
 // Admin: Update balance
-app.post("https://rich-wheel-backend.onrender.com", (req, res) => {
+app.post("/admin/update-balance", (req, res) => {
   const { email, amount, adminEmail } = req.body;
 
   const users = readUsers();
@@ -83,14 +84,14 @@ app.post("https://rich-wheel-backend.onrender.com", (req, res) => {
 });
 
 // Admin: Get all users
-app.get("https://rich-wheel-backend.onrender.com", (req, res) => {
+app.get("/admin/users", (req, res) => {
   const users = readUsers();
   res.json(users);
 });
 
-// Fallback
+// Fallback route
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/index.html"));
 });
 
-app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Server running at http://localhost:${PORT}`));
