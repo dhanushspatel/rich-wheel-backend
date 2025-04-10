@@ -9,11 +9,13 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, "../public")));
+
+// ✅ Fixed public folder path
+app.use(express.static(path.join(__dirname, "public")));
 
 const USERS_FILE = path.join(__dirname, "users.json");
 
-// Helper functions
+// === Helper functions ===
 function readUsers() {
   if (!fs.existsSync(USERS_FILE)) return [];
   const data = fs.readFileSync(USERS_FILE);
@@ -89,9 +91,9 @@ app.get("/admin/users", (req, res) => {
   res.json(users);
 });
 
-// Fallback route
+// ✅ Fixed fallback route path
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../public/index.html"));
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 app.listen(PORT, () => console.log(`🚀 Server running at http://localhost:${PORT}`));
